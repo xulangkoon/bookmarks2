@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}登录{% endblock %}
+{% block content %}
+    <h1>登录</h1>
+    {% if form.errors %}
+    <p>
+        密码或用户名错误，请重试
+    </p>
+    {% else %}
+        <p>请使用该表登录</p>
+    {% endif %}
+    <div class="login-form">
+        <form action="{% url 'login' %}" method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}" />
+            <p><input type="submit" value="登录"></p>
+            <p><a href="{% url "password_reset" %}">忘记密码？</a></p>
+        </form>
+    </div>
+    <div class="social">
+        <ul>
+            <li class="facebook"><a href="{% url "social:begin" "facebook" %}">Login with Facebook</a></li>
+            <li class="twitter"><a href="{% url "social:begin" "twitter" %}">Login with Twitter</a></li>
+            <li class="google"><a href="{% url "social:begin" "google-oauth2" %}">使用谷歌帐号登录</a></li>
+        </ul>
+    </div>
+{% endblock %}

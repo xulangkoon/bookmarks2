@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}上传图片{% endblock %}
+
+{% block content %}
+    <h1>上传图片</h1>
+    <img src="{{ request.GET.url }}" class="image-preview">
+    <form action="." method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="上传！">
+    </form>
+{% endblock %}
